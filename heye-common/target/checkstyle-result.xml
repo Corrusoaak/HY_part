@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="7.5.1">
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/Common.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/consts/Consts.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/consts/HyAnalyzeType.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/consts/package-info.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyAdvise.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyAnalyze.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyAnalyzeResultItem.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyCare.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyConsume.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyCustomer.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyFollow.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyLocation.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyProduct.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyRevisitAnswer.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyRevisitNaire.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyRevisitNaireQuest.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyRevisitQuestion.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyRight.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyRole.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyRoleHelper.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyRoleRight.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyStore.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyStoreWithHyUser.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyTrack.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyUser.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyUserRight.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyUserRole.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/HyWeixin.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/location/HCity.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/location/HLocation.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/location/HProvince.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/location/package-info.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/model/package-info.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/package-info.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/CommonUtil.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/HttpUtil.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/MD5Util.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/OSSUtil.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/package-info.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/RandomUtil.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/RedisClient.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/Result.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/ResultCode.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/ResultGenerator.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/ServiceException.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/SmsApi.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/SmsApiResult.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/ValidateCodeUtil.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/WebUtil.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/WeiXinCode.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/WeiXinSign.java">
+</file>
+<file name="/mnt/d/heye_test/heye_api/heye-common/src/main/java/com/heye/crm/common/utils/WeiXinUtils.java">
+</file>
+</checkstyle>
