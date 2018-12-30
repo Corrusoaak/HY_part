@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyAdviseVoCustomerMapper">
+  <resultMap id="BaseResultMap" type="com.heye.crm.server.vo.HyAdviseVoCustomer">
+    <id column="advise_id" property="adviseId"/>
+    <id column="ctm_id" property="ctmId"/>
+    <result column="advise_state" property="adviseState"/>
+    <result column="advise_type" property="adviseType"/>
+    <result column="advise_desc" property="adviseDesc"/>
+    <result column="advise_pictures" property="advisePictures"/>
+    <result column="advise_replies" property="aviseReplies"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updatedAt"/>
+    <result column="ctm_manager_name" property="managerName"/>
+    <result column="ctm_name" property="ctmName"/>
+    <result column="ctm_location" property="ctmLocation"/>
+  </resultMap>
+
+  <sql id="ColumnList" >
+    advise_id, ctm_id, advise_state, advise_type, advise_desc, advise_pictures, advise_replies, create_at,
+    update_at, ctm_manager_name, ctm_name, ctm_location
+  </sql>
+
+  <select id="searchAdviseList" resultMap="BaseResultMap" parameterType="java.util.Map">
+    SELECT
+    advise_id AS advise_id, hy_advise.ctm_id AS ctm_id, advise_state AS advise_state,
+    advise_type AS advise_type, advise_desc AS advise_desc, advise_pictures AS advise_pictures,
+    advise_replies AS advise_replies, hy_advise.created_at AS created_at, hy_advise.updated_at AS updated_at,
+    ctm_manager_name AS ctm_manager_name, ctm_name AS ctm_name, ctm_location AS ctm_location
+    FROM
+    hy_advise JOIN hy_customer
+    ON
+    hy_advise.ctm_id = hy_customer.ctm_id
+    <where>
+      <if test="adviseState != null">
+        advise_state = #{adviseState}
+      </if>
+      <if test="timeStamp != null">
+        AND UNIX_TIMESTAMP(hy_advise.created_at) >= UNIX_TIMESTAMP(#{timeStamp})
+      </if>
+      <if test="adviseType != null">
+        AND advise_type = #{adviseType}
+      </if>
+      <if test="managerName != null">
+        AND ctm_manager_name like concat('%', #{managerName}, '%')
+      </if>
+      <if test="ctmName != null">
+        AND ctm_name like concat('%', #{ctmName}, '%')
+      </if>
+      <if test="ctmLocation != null">
+        AND ctm_location like concat('%', #{ctmLocation}, '%')
+      </if>
+    </where>
+    ORDER BY hy_advise.create_at DESC
+  </select>
+</mapper>
+

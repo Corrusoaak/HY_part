@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyRightMapper">
+    <resultMap id="BaseResultMap" type="com.heye.crm.common.model.HyRight">
+
+        <id column="right_id" property="rightId"/>
+        <result column="right_parent_id" property="rightParentId"/>
+        <result column="right_name" property="rightName"/>
+        <result column="right_desc" property="rightDesc"/>
+        <result column="right_state" property="rightState"/>
+        <result column="right_module" property="rightModule"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <sql id="Table">hy_right</sql>
+
+    <sql id="ColumnList">
+        right_parent_id,right_name,right_desc,right_module, created_at,updated_at
+    </sql>
+</mapper>

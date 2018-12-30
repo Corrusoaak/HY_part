@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyRevisitAnswerMapper">
+    <resultMap id="BaseResultMap" type="com.heye.crm.common.model.HyRevisitAnswer">
+        <id column="answer_id" property="answerId"/>
+        <result column="ctm_id" property="ctmId"/>
+        <result column="quest_id" property="questId"/>
+        <result column="naire_id" property="naireId"/>
+        <result column="answer_state" property="answerState"/>
+        <result column="answer_content" property="answerContent"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <resultMap id="HyAnswerVoQuestMap" type="com.heye.crm.server.vo.HyAnswerVoQuest">
+        <id property="answerId" column="answer_id" jdbcType="BIGINT"/>
+        <result property="ctmId" column="ctm_id" jdbcType="BIGINT"/>
+        <result property="questId" column="quest_id" jdbcType="BIGINT" />
+        <result property="naireId" column="naire_id" jdbcType="BIGINT"/>
+        <result property="answerState" column="answer_state" jdbcType="INTEGER"/>
+        <result property="answerContent" column="answer_content" jdbcType="VARCHAR"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP" />
+        <result property="questState" column="quest_state" jdbcType="INTEGER" />
+        <result property="questType" column="quest_type" jdbcType="INTEGER" />
+        <result property="questDesc" column="quest_desc" jdbcType="VARCHAR" />
+        <result property="questOption" column="quest_option" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="findByQuestId" resultMap="HyAnswerVoQuestMap">
+    SELECT
+    hy_revisit_answer.answer_id AS answer_id,
+    hy_revisit_answer.ctm_id AS ctm_id,
+    hy_revisit_answer.quest_id AS quest_id,
+    hy_revisit_answer.naire_id AS naire_id,
+    hy_revisit_answer.answer_state AS answer_state,
+    hy_revisit_answer.answer_content AS answer_content,
+    hy_revisit_answer.created_at AS created_at,
+    hy_revisit_answer.updated_at AS updated_at,
+    hy_revisit_question.quest_state AS quest_state,
+    hy_revisit_question.quest_type AS quest_type,
+    hy_revisit_question.quest_desc AS quest_desc,
+    hy_revisit_question.quest_option AS quest_option
+    FROM
+      hy_revisit_answer JOIN hy_revisit_question
+    ON
+      hy_revisit_answer.quest_id = hy_revisit_question.quest_id
+    WHERE
+      hy_revisit_answer.quest_id = #{questId}
+  </select>
+
+    <resultMap id="HyAnswerCount" type="com.heye.crm.server.vo.HyAnswerCount">
+        <result property="answerContent" column="answer_content" jdbcType="VARCHAR"/>
+        <result property="num" column="num" jdbcType="BIGINT"/>
+    </resultMap>
+    <select id="countAnswer" resultMap="HyAnswerCount">
+        SELECT
+          answer_content AS answer_content,
+          count(*) AS num
+        FROM
+          hy_revisit_answer
+        WHERE
+          quest_id = #{questId}
+        GROUP BY
+          answer_content
+        ORDER BY
+          answer_content
+    </select>
+</mapper>

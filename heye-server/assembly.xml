@@ -1,0 +1,25 @@
+<assembly>
+  <id>${project.artifactId}</id>
+  <formats>
+    <format>dir</format>
+  </formats>
+  <includeBaseDirectory>true</includeBaseDirectory>
+  <fileSets>
+    <fileSet>
+      <directory>src/main/resources</directory>
+      <outputDirectory>/conf</outputDirectory>
+      <includes>
+        <include>mybatis/*</include>
+        <include>*.properties</include>
+        <include>*.xml</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+  <dependencySets>
+    <dependencySet>
+      <outputDirectory>lib</outputDirectory>
+      <scope>runtime</scope>
+      <useProjectArtifact>true</useProjectArtifact>
+    </dependencySet>
+  </dependencySets>
+</assembly>

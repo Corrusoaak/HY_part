@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyLocationMapper">
+  <resultMap id="BaseResultMap" type="com.heye.crm.common.model.HyLocation">
+    <id column="loc_id" property="locId"/>
+    <result column="loc_state" property="locState"/>
+    <result column="loc_province" property="locProvince"/>
+    <result column="loc_city" property="locCity"/>
+    <result column="loc_location" property="locLocation"/>
+    <result column="create_at" property="createdAt"/>
+    <result column="update_at" property="updateAt"/>
+  </resultMap>
+
+  <sql id="Table">hy_location</sql>
+
+  <sql id="ColumnList">
+  </sql>
+
+  <select id="getProvinceList"  resultType="String">
+    SELECT
+      loc_province
+    from
+    <include refid="Table"/>
+    where loc_state = 1
+  </select>
+
+  <select id="getCityList"  resultType="String">
+    SELECT
+      loc_city
+    from
+    <include refid="Table"/>
+    where loc_state = 1 and loc_province=#{locProvince}
+  </select>
+
+  <select id="getLocationList"  resultType="String">
+    SELECT
+      loc_location
+    from
+    <include refid="Table"/>
+    where loc_state = 1 and loc_province=#{locProvince} and loc_city=#{locCity}
+  </select>
+</mapper>

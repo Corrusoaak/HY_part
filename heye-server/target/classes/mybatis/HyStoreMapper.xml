@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyStoreMapper">
+    <resultMap id="BaseResultMap" type="com.heye.crm.common.model.HyStore">
+        <id column="store_id" property="storeId"/>
+        <result column="store_manager_id" property="storeManagerId"/>
+        <result column="store_phone_num" property="storePhoneNum"/>
+        <result column="store_telephone" property="storeTelephone"/>
+        <result column="store_name" property="storeName"/>
+        <result column="store_province" property="storeProvince"/>
+        <result column="store_city" property="storeCity"/>
+        <result column="store_position" property="storePosition"/>
+        <result column="store_address" property="storeAddress"/>
+        <result column="store_state" property="storeState"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="latitude_x" property="latitudeX"/>
+        <result column="latitude_y" property="latitudeY"/>
+    </resultMap>
+
+    <resultMap id="HyStoreWithHyUser" type="com.heye.crm.common.model.HyStoreWithHyUser">
+        <id column="store_id" property="storeId"/>
+        <result column="store_manager_id" property="storeManagerId"/>
+        <result column="store_phone_num" property="storePhoneNum"/>
+        <result column="store_telephone" property="storeTelephone"/>
+        <result column="store_name" property="storeName"/>
+        <result column="store_province" property="storeProvince"/>
+        <result column="store_city" property="storeCity"/>
+        <result column="store_position" property="storePosition"/>
+        <result column="store_address" property="storeAddress"/>
+        <result column="store_state" property="storeState"/>
+        <result column="user_account_name" property="userAccountName"/>
+        <result column="user_name" property="userName"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="latitude_x" property="latitudeX"/>
+        <result column="latitude_y" property="latitudeY"/>
+    </resultMap>
+
+    <sql id="Table">hy_store</sql>
+
+    <sql id="ColumnList">
+        store_id, store_manager_id,store_phone_num,store_telephone,store_name,store_province,store_city,store_position,store_state
+        created_at,st_x(g_latitude) as latitude_x, st_y(g_latitude) as latitude_y
+    </sql>
+
+    <select id="getStoreInfoWithHyUser" resultMap="HyStoreWithHyUser" parameterType="java.util.Map">
+        select h.user_account_name, h.user_name, hy_store.store_id, hy_store.store_manager_id, hy_store.store_phone_num,
+        hy_store.store_telephone, hy_store.store_name, hy_store.store_province, hy_store.store_city, hy_store.store_address, hy_store.store_position,
+        hy_store.created_at, st_x(g_latitude) as latitude_x, st_y(g_latitude) as latitude_y
+        from hy_store hy_store
+        join hy_user h on hy_store.store_manager_id = h.user_id
+        where store_state=1
+        <if test="storeProvince != null">
+            AND store_province like concat(#{storeProvince}, '%')
+        </if>
+        <if test="storeCity != null">
+            AND store_city like concat(#{storeCity}, '%')
+        </if>
+        <if test="storePosition != null">
+            AND store_position like concat(#{storePosition}, '%')
+        </if>
+    </select>
+
+</mapper>

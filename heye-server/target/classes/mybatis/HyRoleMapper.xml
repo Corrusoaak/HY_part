@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyRoleMapper">
+    <resultMap id="BaseResultMap" type="com.heye.crm.common.model.HyRole">
+        <id column="role_id" property="roleId" jdbcType="BIGINT"/>
+        <result column="role_parent_id" property="roleParentId" jdbcType="BIGINT"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="role_desc" property="roleDesc" jdbcType="VARCHAR"/>
+        <result column="role_state" property="roleState" jdbcType="BIGINT"/>
+        <result column="role_range_type" property="roleRangeType" jdbcType="BIGINT"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Table">hy_role</sql>
+
+    <sql id="ColumnList">
+        role_parent_id,role_name,role_desc,created_at,updated_at
+    </sql>
+
+    <resultMap id="HyRoleRightVoRoleVoRightJoinMap" type="com.heye.crm.server.vo.HyRoleRightVoRoleVoRight">
+        <id property="rrId" column="rr_id" jdbcType="BIGINT"/>
+        <result property="roleId" column="role_id" jdbcType="BIGINT"/>
+        <result property="rightId" column="right_id" jdbcType="BIGINT"/>
+        <result property="rightType" column="right_type" jdbcType="INTEGER"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+        <result property="roleParentId" column="role_parent_id" jdbcType="BIGINT" />
+        <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+        <result property="roleDesc" column="role_desc" jdbcType="VARCHAR"/>
+        <result property="rightParentId" column="right_parent_id" jdbcType="BIGINT"/>
+        <result property="rightName" column="right_name" jdbcType="VARCHAR"/>
+        <result property="rightDesc" column="right_desc" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="HyRoleRightJoinMap" type="com.heye.crm.server.vo.HyRoleRightJoin">
+        <id property="rrId" column="rr_id" jdbcType="BIGINT"/>
+        <result property="roleId" column="role_id" jdbcType="BIGINT"/>
+        <result property="rightId" column="right_id" jdbcType="INTEGER" />
+        <result property="rightType" column="right_type" jdbcType="INTEGER"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="roleParentId" column="role_parent_id" jdbcType="BIGINT"/>
+        <result property="roleRangeType" column="role_range_type" jdbcType="INTEGER"/>
+        <result property="roleState" column="role_state" jdbcType="INTEGER" />
+        <result property="roleName" column="role_name" jdbcType="VARCHAR" />
+        <result property="roleDesc" column="role_desc" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="getRoleRightList" resultMap="HyRoleRightJoinMap">
+        SELECT
+        hy_role.role_id, hy_role.created_at, hy_role.role_parent_id, hy_role.role_name, hy_role.role_desc, role_range_type, hy_role.role_state,
+        hy_role_right.rr_id,  hy_role_right.right_id, hy_role_right.right_type
+        FROM
+        hy_role left JOIN hy_role_right
+        ON
+        hy_role_right.role_id = hy_role.role_id
+    </select>
+
+    <select id="getRoleRightListById" resultMap="HyRoleRightJoinMap">
+        SELECT
+        hy_role.role_id, hy_role.created_at, hy_role.role_parent_id, hy_role.role_name, hy_role.role_desc, role_range_type, role_state,
+        hy_role_right.rr_id,  hy_role_right.right_id, hy_role_right.right_type
+        FROM
+        hy_role left JOIN hy_role_right
+        ON
+        hy_role_right.role_id = hy_role.role_id
+        WHERE  hy_role.role_id=#{roleId}
+    </select>
+
+    <select id="getRoleList" resultMap="HyRoleRightVoRoleVoRightJoinMap">
+        SELECT
+        hy_role_right.rr_id, hy_role_right.role_id, hy_role_right.right_id, hy_role_right.right_type,
+        hy_role_right.created_at, hy_role_right.updated_at, hy_role.role_parent_id, hy_role.role_name,
+        hy_role.role_desc, hy_right.right_parent_id, hy_right.right_name,
+        hy_right.right_desc
+        FROM
+        hy_role_right JOIN hy_role JOIN hy_right
+        ON
+        hy_role_right.role_id = hy_role.role_id AND hy_role_right.right_id = hy_right.right_id
+    </select>
+
+    <select id="getRoleListById" resultMap="HyRoleRightVoRoleVoRightJoinMap">
+        SELECT
+        hy_role_right.rr_id, hy_role_right.role_id, hy_role_right.right_id, hy_role_right.right_type,
+        hy_role_right.created_at, hy_role_right.updated_at, hy_role.role_parent_id, hy_role.role_name,
+        hy_role.role_desc, hy_right.right_parent_id, hy_right.right_name,
+        hy_right.right_desc
+        FROM
+        hy_role_right JOIN hy_role JOIN hy_right
+        ON
+        hy_role_right.role_id = hy_role.role_id AND hy_role_right.right_id = hy_right.right_id
+        WHERE hy_role_right.rr_id = #{rrId}
+    </select>
+
+</mapper>
+

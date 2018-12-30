@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyNaireVoQuestionMapper">
+    <resultMap id="BaseResultMap" type="com.heye.crm.server.vo.HyNaireVoQuestion">
+        <id column="naire_id" property="naireId"/>
+        <id column="quest_id" property="questId"/>
+        <result column="naire_type" property="naireType"/>
+        <result column="naire_name" property="naireName"/>
+        <result column="naire_list" property="naireList"/>
+        <result column="quest_type" property="questType"/>
+        <result column="quest_desc" property="questDesc"/>
+        <result column="quest_option" property="questOption"/>
+    </resultMap>
+
+    <select id="getNaireDetail" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        hy_revisit_naire.naire_id as naire_id, hy_revisit_question.quest_id as quest_id,
+        naire_type,naire_name,naire_list,quest_type,quest_desc,quest_option
+        from
+        hy_revisit_naire join hy_revisit_naire_quest join hy_revisit_question
+        on hy_revisit_naire.naire_id=hy_revisit_naire_quest.naire_id
+        and hy_revisit_question.quest_id=hy_revisit_naire_quest.quest_id
+        where hy_revisit_naire.naire_id=#{naireId} and hy_revisit_naire_quest.nq_state=1
+    </select>
+</mapper>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyUserMapper">
+  <resultMap id="BaseResultMap" type="com.heye.crm.common.model.HyUser">
+    <id column="user_id" property="userId"/>
+    <result column="user_account_name" property="userAccountName"/>
+    <result column="user_name" property="userName"/>
+    <result column="user_password" property="userPasswd"/>
+    <result column="user_state" property="userState"/>
+    <result column="user_sex" property="userSex"/>
+    <result column="user_range_type" property="userRangeType"/>
+    <result column="user_picture" property="userPicture"/>
+    <result column="user_province" property="userProvince"/>
+    <result column="user_city" property="userCity"/>
+    <result column="user_birth_day" property="userBirthDay"/>
+    <result column="user_email" property="userEmail"/>
+    <result column="user_phone_num" property="userPhoneNum"/>
+    <result column="user_telephone" property="userTelephone"/>
+    <result column="user_location" property="userLocation"/>
+    <result column="user_detail_address" property="userDetailAddress"/>
+    <result column="user_zip_code" property="userZipCode"/>
+    <result column="user_identity" property="userIdentity"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updateAt"/>
+    <result column="role_id" property="roleId"/>
+    <result column="user_parent_id" property="userParentId"/>
+    <result column="user_parent_name" property="userParentName"/>
+  </resultMap>
+
+  <sql id="Table">hy_user</sql>
+
+  <select id="getUser" resultMap="BaseResultMap">
+    select
+    *
+    from
+    hy_user
+  </select>
+
+  <resultMap id="UserRoleMap" type="com.heye.crm.server.vo.HyUserVoRole">
+    <id column="user_id" property="userId"/>
+    <result column="user_account_name" property="userAccountName"/>
+    <result column="user_name" property="userName"/>
+    <result column="user_password" property="userPasswd"/>
+    <result column="user_state" property="userState"/>
+    <result column="user_sex" property="userSex"/>
+    <result column="user_picture" property="userPicture"/>
+    <result column="user_province" property="userProvince"/>
+    <result column="user_city" property="userCity"/>
+    <result column="user_birth_day" property="userBirthDay"/>
+    <result column="user_email" property="userEmail"/>
+    <result column="user_phone_num" property="userPhoneNum"/>
+    <result column="user_telephone" property="userTelephone"/>
+    <result column="user_location" property="userLocation"/>
+    <result column="user_detail_address" property="userDetailAddress"/>
+    <result column="user_zip_code" property="userZipCode"/>
+    <result column="user_identity" property="userIdentity"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updateAt"/>
+    <result column="role_id" property="roleId"/>
+    <result column="user_parent_id" property="userParentId"/>
+    <result column="user_parent_name" property="userParentName"/>
+
+    <result column="role_parent_id" property="roleParentId"/>
+    <result column="role_name" property="roleName"/>
+    <result column="role_desc" property="roleDesc"/>
+    <result column="role_created_at" property="roleCreatedAt"/>
+    <result column="role_updated_at" property="roleUpdatedAt"/>
+
+  </resultMap>
+
+  <resultMap id="UserRightMap" type="com.heye.crm.server.vo.HyUserVoRight">
+    <id column="user_id" property="userId"/>
+    <result column="user_name" property="userName"/>
+    <result column="right_id" property="rightId"/>
+    <result column="right_parent_id" property="rightParentId"/>
+    <result column="right_name" property="rightName"/>
+    <result column="right_desc" property="rightDesc"/>
+    <result column="right_created_at" property="rightCreatedAt"/>
+    <result column="right_updated_at" property="rightUpdatedAt"/>
+
+  </resultMap>
+
+  <select id="getUserByIdOrNameOrPhone" resultType="Integer">
+    select count(*)
+    from hy_user
+    where
+      user_name=#{userName} or user_telephone=#{userTelephone} or user_identity=#{userIdentity}
+  </select>
+
+  <select id="getUserList" resultMap="UserRoleMap">
+    SELECT
+    user_name AS user_name,
+    user_id AS user_id,user_account_name AS user_account_name,
+    user_password AS user_password,user_state AS user_state,
+    user_sex AS user_sex,user_picture AS user_picture,
+    user_province AS user_province, user_city as user_city, user_birth_day AS user_birth_day,
+    user_email AS user_email,user_phone_num AS user_phone_num,
+    user_telephone AS user_telephone,user_location AS user_location,
+    user_detail_address AS user_detail_address,user_zip_code AS user_zip_code,
+    user_identity AS user_identity,hy_user.created_at AS created_at,
+    hy_user.updated_at AS updated_at, hy_user.role_id AS role_id,
+    user_parent_id AS user_parent_id,user_parent_name AS user_parent_name,
+    role_parent_id AS role_parent_id,role_name AS role_name,
+    role_desc AS role_desc,hy_role.created_at AS role_created_at,
+    hy_role.updated_at AS role_updated_at
+    FROM
+      hy_user JOIN hy_role
+    ON
+      hy_user.role_id = hy_role.role_id
+    WHERE
+      (user_state=1 or user_state=2)
+  </select>
+
+  <select id="getUserListWithCond" resultMap="UserRoleMap" parameterType="java.util.Map">
+    SELECT
+    user_name AS user_name,
+    user_id AS user_id,user_account_name AS user_account_name,
+    user_password AS user_password,user_state AS user_state,
+    user_sex AS user_sex,user_picture AS user_picture,
+    user_province AS user_province, user_city as user_city, user_birth_day AS user_birth_day,
+    user_email AS user_email,user_phone_num AS user_phone_num,
+    user_telephone AS user_telephone,user_location AS user_location,
+    user_detail_address AS user_detail_address,user_zip_code AS user_zip_code,
+    user_identity AS user_identity,hy_user.created_at AS created_at,
+    hy_user.updated_at AS updated_at, hy_user.role_id AS role_id,
+    user_parent_id AS user_parent_id,user_parent_name AS user_parent_name,
+    role_parent_id AS role_parent_id,role_name AS role_name,
+    role_desc AS role_desc,hy_role.created_at AS role_created_at,
+    hy_role.updated_at AS role_updated_at
+    FROM
+      hy_user JOIN hy_role
+    ON
+      hy_user.role_id = hy_role.role_id
+    <where>
+      (user_state=1 or user_state=2)
+      <if test="userAccountName != null">
+        AND hy_user.user_account_name LIKE concat('%', #{userAccountName}, '%')
+      </if>
+      <if test="userDetailAddress != null">
+        AND hy_user.user_detail_address LIKE concat('%', #{userDetailAddress}, '%')
+      </if>
+      <if test="roleId != null">
+        AND hy_role.role_id = #{roleId}
+      </if>
+    </where>
+    ORDER BY hy_user.create_at DESC
+  </select>
+
+  <select id="getUserDetailById"  resultMap="UserRoleMap">
+    SELECT
+    user_name AS user_name,
+    user_id AS user_id,user_account_name AS user_account_name,
+    user_password AS user_password,user_state AS user_state,
+    user_sex AS user_sex,user_picture AS user_picture,
+    user_province AS user_province, user_city as user_city, user_birth_day AS user_birth_day,
+    user_email AS user_email,user_phone_num AS user_phone_num,
+    user_telephone AS user_telephone,user_location AS user_location,
+    user_detail_address AS user_detail_address,user_zip_code AS user_zip_code,
+    user_identity AS user_identity,hy_user_se.created_at AS created_at,
+    hy_user_se.updated_at AS updated_at,hy_user_se.role_id AS role_id,
+    user_parent_id AS user_parent_id,user_parent_name AS user_parent_name,
+    role_parent_id AS role_parent_id,role_name AS role_name,
+    role_desc AS role_desc,hy_role.created_at AS role_created_at,
+    hy_role.updated_at AS role_updated_at
+    FROM
+    (SELECT * FROM hy_user WHERE user_state=1 AND user_id=#{userId}) AS hy_user_se JOIN hy_role
+    ON hy_user_se.role_id = hy_role.role_id
+  </select>
+
+  <select id="getUserRightById"  resultMap="UserRightMap">
+    SELECT
+    user_id as user_id,user_name as user_name,hy_role_right.right_id as right_id, hy_user.role_id as role_id,
+    right_parent_id as right_parent_id,right_name as right_name,
+    right_desc as right_desc,hy_right.created_at as right_created_at,
+    hy_right.updated_at as right_updated_at
+    FROM
+    (SELECT * FROM hy_user WHERE user_state=1 AND user_id=#{userId}) AS hy_user JOIN hy_role_right JOIN hy_right
+    ON
+    hy_user.role_id=hy_role_right.role_id AND hy_role_right.right_id=hy_right.right_id
+  </select>
+</mapper>
