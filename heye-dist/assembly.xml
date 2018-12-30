@@ -1,0 +1,23 @@
+<assembly>
+  <id>${project.artifactId}</id>
+  <formats>
+    <format>tar</format>
+  </formats>
+  <includeBaseDirectory>true</includeBaseDirectory>
+  <baseDirectory>heye-${project.version}</baseDirectory>
+
+  <fileSets>
+    <!-- bin -->
+    <fileSet>
+      <directory>bin</directory>
+      <outputDirectory>/bin</outputDirectory>
+    </fileSet>
+
+    <!-- heye-server-->
+    <fileSet>
+      <directory>../heye-server/target/heye-server/heye-server</directory>
+      <outputDirectory>/heye-server</outputDirectory>
+    </fileSet>
+  </fileSets>
+</assembly>
+
