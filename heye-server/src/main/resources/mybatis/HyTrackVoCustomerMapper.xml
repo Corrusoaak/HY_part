@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyTrackVoCustomerMapper">
+  <resultMap id="BaseResultMap" type="com.heye.crm.server.vo.HyTrackVoCustomer">
+    <id column="track_id" property="trackId"/>
+    <id column="ctm_id" property="ctmId"/>
+    <id column="csm_id" property="csmId"/>
+    <id column="pro_id" property="proId"/>
+    <result column="pro_name" property="proName"/>
+    <result column="track_state" property="trackState"/>
+    <result column="track_type" property="trackType"/>
+    <result column="track_desc" property="trackDesc"/>
+    <result column="track_pictures" property="trackPictures"/>
+    <result column="track_replies" property="trackReplies"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updatedAt"/>
+    <result column="ctm_manager_name" property="managerName"/>
+    <result column="ctm_name" property="ctmName"/>
+    <result column="ctm_location" property="ctmLocation"/>
+  </resultMap>
+
+  <sql id="ColumnList" >
+    track_id, ctm_id, pro_id, track_state, track_type, track_desc, track_pictures, track_replies, create_at,
+    update_at, ctm_manager_name, ctm_name, ctm_location
+  </sql>
+
+  <select id="searchTrackList" resultMap="BaseResultMap" parameterType="java.util.Map">
+    SELECT
+    track_id AS track_id, hy_track.ctm_id AS ctm_id, pro_id AS pro_id, pro_name AS pro_name, track_state AS track_state,
+    track_type AS track_type, track_desc AS track_desc, track_pictures AS track_pictures,
+    track_replies AS track_replies, hy_track.created_at AS created_at, hy_track.updated_at AS updated_at,
+    ctm_manager_name AS ctm_manager_name, ctm_name AS ctm_name, ctm_location AS ctm_location
+    FROM
+    hy_track JOIN hy_customer
+    ON
+    hy_track.ctm_id = hy_customer.ctm_id
+    <where>
+      <if test="trackState != null">
+        track_state = #{trackState}
+      </if>
+      <if test="timeStamp != null">
+        AND UNIX_TIMESTAMP(hy_track.created_at) >= UNIX_TIMESTAMP(#{timeStamp})
+      </if>
+      <if test="trackType != null">
+        AND track_type = #{trackType}
+      </if>
+      <if test="managerName != null">
+        AND ctm_manager_name like concat('%', #{managerName}, '%')
+      </if>
+      <if test="ctmName != null">
+        AND ctm_name like concat('%', #{ctmName}, '%')
+      </if>
+      <if test="ctmLocation != null">
+        AND ctm_location like concat('%', #{ctmLocation}, '%')
+      </if>
+    </where>
+    ORDER BY hy_track.create_at DESC
+  </select>
+</mapper>
+

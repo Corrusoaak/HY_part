@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyAnalyzeMapper">
+    <resultMap id="BaseResultMap" type="com.heye.crm.common.model.HyAnalyze">
+        <id column="ana_id" property="anaId"/>
+        <result column="label_name" property="labelName"/>
+        <result column="label_value" property="labelValue"/>
+        <result column="ana_type" property="anaType"/>
+        <result column="agg_level" property="aggLevel"/>
+        <result column="ana_name" property="anaName"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <sql id="Table">hy_analyze</sql>
+
+    <insert id="save" >
+        insert into hy_analyze (ana_name,agg_level,ana_type,label_name,label_value,created_at)
+        values (#{arg0},#{arg1},#{arg2},#{arg3},#{arg4},#{arg5})
+    </insert>
+
+</mapper>

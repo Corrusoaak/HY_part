@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
+        </Property>
+    </Properties>
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <RollingFile name="FileAppender" fileName="logs/heye-server.log"
+                     filePattern="./logs/heye-server-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+        <Logger name="com.heye.crm" level="debug" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+        </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="ConsoleAppender"/>
+            <!--AppenderRef ref="FileAppender" /-->
+        </Root>
+
+        <logger name="com.heye">
+            <level>DEBUG</level>
+        </logger>
+        <logger name="com.springframework">
+            <level>DEBUG</level>
+        </logger>
+        <logger name="com.ibatis" additivity="true">
+            <level>DEBUG</level>
+        </logger>
+        <logger name="com.ibatis.common.jdbc.SimpleDataSource" additivity="true">
+            <level>DEBUG</level>
+        </logger>
+        <logger name="com.ibatis.common.jdbc.ScriptRunner" additivity="true">
+            <level>DEBUG</level>
+        </logger>
+        <logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" additivity="true">
+            <level>DEBUG</level>
+        </logger>
+        <logger name="Java.sql.Connection" additivity="true">
+            <level>DEBUG</level>
+        </logger>
+        <logger name="java.sql.Statement" additivity="true">
+            <level>DEBUG</level>
+        </logger>
+        <logger name="java.sql.PreparedStatement" additivity="true">
+            <level>DEBUG</level>
+        </logger>
+        <logger name="java.sql.ResultSet" additivity="true">
+            <level>DEBUG</level>
+        </logger>
+        <logger name="org.apache.ibatis.logging.commons.JakartaCommonsLoggingImpl" additivity="true">
+            <level>DEBUG</level>
+        </logger>
+    </Loggers>
+
+</Configuration>

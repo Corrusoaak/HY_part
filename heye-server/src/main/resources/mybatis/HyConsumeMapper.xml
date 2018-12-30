@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyConsumeMapper">
+    <resultMap id="BaseResultMap" type="com.heye.crm.common.model.HyConsume">
+        <id column="csm_id" property="csmId"/>
+        <result column="ctm_id" property="ctmId"/>
+        <result column="pro_id" property="proId"/>
+        <result column="csm_money" property="csmMoney"/>
+        <result column="csm_state" property="csmState"/>
+        <result column="csm_at" property="csmAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <sql id="Table">hr_consume</sql>
+
+    <sql id="ColumnList">
+        ctm_id,pro_id,csm_money,csm_at,updated_at
+    </sql>
+</mapper>

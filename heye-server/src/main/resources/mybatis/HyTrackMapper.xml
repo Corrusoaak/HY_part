@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyTrackMapper">
+  <resultMap id="BaseResultMap" type="com.heye.crm.common.model.HyTrack">
+    <id column="track_id" property="trackId"/>
+    <id column="ctm_id" property="ctmId"/>
+    <id column="csm_id" property="csmId"/>
+    <id column="pro_id" property="proId"/>
+    <result column="track_state" property="trackState"/>
+    <result column="track_type" property="trackType"/>
+    <result column="track_desc" property="trackDesc"/>
+    <result column="track_pictures" property="trackPictures"/>
+    <result column="track_replies" property="aviseReplies"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updateAt"/>
+  </resultMap>
+
+  <sql id="Table">hy_track</sql>
+
+  <sql id="ColumnList">
+  </sql>
+</mapper>

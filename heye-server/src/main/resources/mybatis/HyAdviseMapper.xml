@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyAdviseMapper">
+  <resultMap id="BaseResultMap" type="com.heye.crm.common.model.HyAdvise">
+    <id column="advise_id" property="adviseId"/>
+    <id column="ctm_id" property="ctmId"/>
+    <result column="advise_state" property="adviseState"/>
+    <result column="advise_type" property="adviseType"/>
+    <result column="advise_desc" property="adviseDesc"/>
+    <result column="advise_pictures" property="advisePictures"/>
+    <result column="advise_replies" property="aviseReplies"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updateAt"/>
+  </resultMap>
+
+  <sql id="Table">hy_advise</sql>
+
+  <sql id="ColumnList">
+  </sql>
+</mapper>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyCustomerMapper">
+  <resultMap id="BaseResultMap" type="com.heye.crm.common.model.HyCustomer">
+    <id column="ctm_id" property="ctmId"/>
+    <result column="store_id" property="storeId"/>
+    <result column="ctm_name" property="ctmName"/>
+    <result column="ctm_account_name" property="ctmAccountName"/>
+    <result column="ctm_password" property="ctmPasswd"/>
+    <result column="ctm_sex" property="ctmSex"/>
+    <result column="ctm_state" property="ctmState"/>
+    <result column="ctm_email" property="ctmEmail"/>
+    <result column="ctm_picture" property="ctmPicture"/>
+    <result column="ctm_phone_num" property="ctmPhoneNum"/>
+    <result column="ctm_telephone" property="ctmTelephone"/>
+    <result column="ctm_birth_day" property="ctmBirthDay"/>
+    <result column="ctm_province" property="ctmProvince"/>
+    <result column="ctm_city" property="ctmCity"/>
+    <result column="ctm_manager_name" property="managerName"/>
+    <result column="ctm_location" property="ctmLocation"/>
+    <result column="ctm_detail_address" property="ctmDetailAddress"/>
+    <result column="ctm_zip_code" property="ctmZipCode"/>
+    <result column="ctm_identity" property="ctmIdentity"/>
+    <result column="latitude_x" property="latitudeX"/>
+    <result column="latitude_y" property="latitudeY"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updatedAt"/>
+  </resultMap>
+
+  <sql id="Table">hy_customer</sql>
+
+  <sql id="ColumnList">
+    ctm_id, store_id, ctm_name, ctm_account_name, ctm_password, ctm_sex, ctm_state, ctm_email, ctm_picture, ctm_phone_num,
+    ctm_telephone, ctm_birth_day, ctm_province, ctm_city, ctm_manager_name, ctm_location, ctm_detail_address, ctm_zip_code,
+    ctm_identity, create_at, st_x(g_latitude) as latitude_x, st_y(g_latitude) as latitude_y
+  </sql>
+
+  <select id="getCustomerList" resultMap="BaseResultMap" parameterType="java.util.Map">
+    SELECT
+    <include refid="Table"/>
+    FROM
+    <include refid="Table"/>
+    WHERE ctm_state = 1
+  </select>
+
+  <select id="getCustomerListCount" resultMap="BaseResultMap" parameterType="java.util.Map">
+    SELECT
+    count(1)
+    FROM
+    <include refid="Table"/>
+    WHERE ctm_state = 1
+  </select>
+
+  <delete id="deleteHyCustomById">
+    DELETE FROM
+    <include refid="Table"/>
+    WHERE ctm_id = #{ctmId}
+  </delete>
+
+  <select id="getHyCustomById">
+    SELECT
+    <include refid="ColumnList"/>
+    FROM
+    <include refid="Table"/>
+    WHERE ctm_id = #{ctmId} AND ctm_state = 1
+  </select>
+
+  <select id="getHyCustomByIdentity">
+    SELECT
+    <include refid="ColumnList"/>
+    FROM
+    <include refid="Table"/>
+    WHERE ctm_identity = #{ctmIdentity} AND ctm_state = 1
+  </select>
+
+  <select id="getCustomerByBirth" resultMap="BaseResultMap" >
+    select
+    <include refid="Table"/>
+    from
+    hy_customer
+    where
+    date_format(ctm_birth_day,'%m %d') = date_format(#{ctmBirthDay},'%m %d') and ctm_state = 1
+  </select>
+
+  <select id="getCustomerByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Table"/>
+    from hy_customer
+    where ctm_state=1
+    <if test="arg0!=-1">
+      and ctm_sex=#{arg0}
+    </if>
+    <if test="arg1!= null">
+      and  (year(now())-year(ctm_birth_day)-1) + ( DATE_FORMAT(ctm_birth_day, '%m%d') &lt;= DATE_FORMAT(NOW(), '%m%d')) between #{arg2} and #{arg3}
+    </if>
+    <if test="arg4!=null">
+      and date_format(ctm_birth_day,'%m %d') = date_format(#{arg4},'%m %d')
+    </if>
+
+  </select>
+
+  <select id="getCustomerByDate" resultMap="BaseResultMap">
+    select
+    <include refid="Table"/>
+     from hy_customer
+    where ctm_state=1 and created_at between #{arg0} and #{arg1}
+  </select>
+
+  <insert id="insertIntoCustomer" parameterType="com.heye.crm.common.model.HyCustomer">
+    insert into
+    <include refid="Table"/>
+    (
+    store_id, ctm_name, ctm_account_name, ctm_password, ctm_sex, ctm_state, ctm_email, ctm_picture, ctm_phone_num,
+    ctm_telephone, ctm_birth_day, ctm_province, ctm_city, ctm_manager_name, ctm_location, ctm_detail_address, ctm_zip_code,
+    ctm_identity, created_at, g_latitude
+    )
+    values (
+    #{storeId}, #{ctmName}, #{ctmAccountName}, #{ctmPasswd}, #{ctmSex}, #{ctmState}, #{ctmEmail}, #{ctmPicture}, #{ctmPhoneNum},
+    #{ctmTelephone}, #{ctmBirthDay}, #{ctmProvince}, #{ctmCity}, #{managerName}, #{ctmLocation}, #{ctmDetailAddress},
+    #{ctmZipCode}, #{ctmIdentity}, #{createdAt}, GeomFromText(concat('POINT(', #{latitudeX}, ' ', #{latitudeY}, ')'))
+    )
+  </insert>
+</mapper>

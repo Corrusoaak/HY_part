@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyFollowMapper">
+    <resultMap id="BaseResultMap" type="com.heye.crm.common.model.HyFollow">
+        <id column="follow_id" property="followId"/>
+        <result column="store_id" property="storeId"/>
+        <result column="express_id" property="expressId"/>
+        <result column="express_company" property="expressCompany"/>
+        <result column="store_telephone" property="storeTelephone"/>
+        <result column="store_manager" property="storeManager"/>
+        <result column="store_detail_address" property="storeDetailAddress"/>
+        <result column="deliver_house" property="deliverHouse"/>
+        <result column="deliver_id" property="deliverId"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <sql id="Table">hy_follow</sql>
+</mapper>

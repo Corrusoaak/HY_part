@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!-- Globally enables or disables any caches configured in any mapper under this config -->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- Sets the number of seconds the driver will wait for a response from the database -->
+        <setting name="defaultStatementTimeout" value="1000"/>
+        <!-- Enables automatic mapping from classic database column names A_COLUMN to camel case classic Java property names aColumn -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- Allows JDBC support for generated keys. A compatible driver is required.
+        This setting forces generated keys to be used if set to true,
+         as some drivers deny compatibility but still work -->
+        <setting name="useGeneratedKeys" value="true"/>
+    </settings>
+
+    <!--plugins>
+        <plugin interceptor="com.app.mvc.common.SQLMonitorInterceptor"/>
+    </plugins-->
+
+    <environments default='default'>
+        <environment id='default'>
+            <transactionManager type='JDBC'/>
+            <dataSource type='POOLED'>
+                <property name='driver' value='com.mysql.jdbc.Driver'/>
+                <property name='url'
+                          value='jdbc:mysql://47.106.80.130:3306/heye?user=heye&amp;password=!Qscvdw2&amp;useUnicode=true&amp;characterEncoding=UTF8&amp;autoReconnect=true&amp;useAffectedRows=true'/>
+                <property name="poolPingQuery" value="SELECT 1"/>
+                <property name="poolPingEnabled" value="true"/>
+                <property name="poolPingConnectionsNotUsedFor" value="3600000"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource='mybatis/HyCareMapper.xml'/>
+        <mapper resource="mybatis/HyCustomerMapper.xml"/>
+        <mapper resource="mybatis/HyAnalyzeMapper.xml"/>
+    </mappers>
+
+</configuration>

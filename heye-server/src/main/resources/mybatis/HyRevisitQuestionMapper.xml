@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyRevisitQuestionMapper">
+    <resultMap id="BaseResultMap" type="com.heye.crm.common.model.HyRevisitQuestion">
+        <id column="quest_id" property="questId"/>
+        <result column="quest_type" property="questType"/>
+        <result column="quest_desc" property="questDesc"/>
+        <result column="quest_option" property="questOption"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+
+</mapper>

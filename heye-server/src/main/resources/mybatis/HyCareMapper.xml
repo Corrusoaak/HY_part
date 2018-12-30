@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heye.crm.server.dao.HyCareMapper">
+    <resultMap id="BaseResultMap" type="com.heye.crm.common.model.HyCare">
+        <id column="care_id" property="careId"/>
+        <result column="fest_name" property="festName"/>
+        <result column="fest_date" property="festDate"/>
+        <result column="send_time" property="sendTime"/>
+        <result column="send_desc" property="sendDesc"/>
+        <result column="verify_state" property="verifyState"/>
+        <result column="send_state" property="sendState"/>
+        <result column="switch_state" property="switchState"/>
+        <result column="ctm_range_type" property="ctmRangeType"/>
+        <result column="ctm_sex" property="ctmSex"/>
+        <result column="age_range" property="ageRange"/>
+        <result column="consume_range" property="consumeRange"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <sql id="Table">hy_care</sql>
+
+    <select id="getSchedulerCareList" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select * from hy_care
+    where
+      switch_state=0
+  </select>
+
+    <update id="updateSendState" >
+        update hy_care set send_state = #{arg0} where care_id = #{arg1}
+    </update>
+</mapper>
